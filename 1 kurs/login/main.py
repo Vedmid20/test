@@ -1,4 +1,5 @@
 import flet as ft
+import time
 
 calc = ''
 def main(page: ft.Page):
@@ -28,7 +29,8 @@ def main(page: ft.Page):
     def rez(e):
         global calc
         calc = eval(calc)
-        output_text.value = calc
+        round(calc, 5)
+        output_text.value = str(calc)
         page.update()
     def minus(e):
         global calc
@@ -100,37 +102,68 @@ def main(page: ft.Page):
         calc += '3.14'
         output_text.value = calc
         page.update()
-    def color(e):
-        page.theme_mode = 'light' if page.theme_mode == 'dark' else 'dark'
+    def mustFunctional(e):
+        page.window_width = 355; page.window_height = 380
+        time.sleep(0.1)
         page.update()
+    def lowerFunctional(e):
+        page.window_width = 290; page.window_height = 340
+        time.sleep(0.1)
+        page.update()
+    def sqrt(e):
+        global  calc
+        calc = int(calc) ** 0.5
+        output_text.value = round(calc,  5)
+        page.update()
+    def num_e(e):
+        global calc
+        calc += '2.71'
+        output_text.value = calc
+        page.update()
+    def stepen(e):
+        global calc
+        calc = int(calc) ** 2
+        output_text.value = calc
+        page.update()
+
+
+    page.theme_mode = 'light'
+    page.window_width = 290; page.window_height = 340
+    page.window_resizable = False
+
     page.add(ft.Row([
-        ft.ElevatedButton('π', on_click=num_pi, bgcolor='RED300'),
-        ft.ElevatedButton('C', on_click=clr, bgcolor='RED300'),
-        ft.ElevatedButton('⬅', on_click=backspace, bgcolor='RED300'),
-        ft.ElevatedButton('☀', on_click=color, bgcolor='RED300'),
+        ft.ElevatedButton('C', on_click=clr, bgcolor='RED300', width=79),
+        ft.ElevatedButton('↩', on_click=backspace, bgcolor='RED300', width=79),
+        ft.ElevatedButton('↪', on_click=mustFunctional, bgcolor='RED300', width=79),
+        ft.ElevatedButton('↩', on_click=lowerFunctional, bgcolor='RED300', width=59),
     ]))
     page.add(ft.Row([
         ft.ElevatedButton('1', on_click=num1, bgcolor='AMBER100'),
         ft.ElevatedButton('2', on_click=num2, bgcolor='AMBER100'),
         ft.ElevatedButton('3', on_click=num3, bgcolor='AMBER100'),
-        ft.ElevatedButton('+', on_click=plus, bgcolor='RED300'),
+        ft.ElevatedButton('+', on_click=plus, bgcolor='RED300', width=59),
+        ft.ElevatedButton('π', on_click=num_pi, bgcolor='AMBER100', width=59)
     ]))
     page.add(ft.Row([
         ft.ElevatedButton('4', on_click=num4, bgcolor='AMBER100'),
         ft.ElevatedButton('5', on_click=num5, bgcolor='AMBER100'),
         ft.ElevatedButton('6', on_click=num6, bgcolor='AMBER100'),
-        ft.ElevatedButton('-', on_click=minus, bgcolor='RED300'),
+        ft.ElevatedButton('-', on_click=minus, bgcolor='RED300', width=59),
+        ft.ElevatedButton('√', on_click=sqrt, bgcolor='AMBER100', width=59)
     ]))
     page.add(ft.Row([
         ft.ElevatedButton('7', on_click=num7, bgcolor='AMBER100'),
         ft.ElevatedButton('8', on_click=num8, bgcolor='AMBER100'),
         ft.ElevatedButton('9', on_click=num9, bgcolor='AMBER100'),
-        ft.ElevatedButton('*', on_click=mnog, bgcolor='RED300'),
+        ft.ElevatedButton('*', on_click=mnog, bgcolor='RED300', width=59),
+        ft.ElevatedButton('e', on_click=num_e, bgcolor='AMBER100', width=59)
     ]))
     page.add(ft.Row([
         ft.ElevatedButton('.', on_click=krapka, bgcolor='RED300'),
         ft.ElevatedButton('0', on_click=num0, bgcolor='AMBER100'),
         ft.ElevatedButton('/', on_click=dil, bgcolor='RED300'),
-        ft.ElevatedButton('=', on_click=rez, bgcolor='RED300'),
+        ft.ElevatedButton('=', on_click=rez, bgcolor='RED300', width=59),
+        ft.ElevatedButton('ⁿ', on_click=stepen, bgcolor='AMBER100', width=59)
     ]))
+
 ft.app(target=main)
